@@ -1,0 +1,65 @@
+
+
+<html>
+<head>
+<title>character shifting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body>
+<form >
+                <h1>Data passing from one text box to other box</h1>
+                <input  id="inputType"type="text" value="" />
+                    <input  id="output"type="text" value="" /> <br /></br />
+                    <input id="forward"type="button" value=">>" />
+                    <input id="pause"type="button" value="||" />
+                    <input id="backward"type="button" value="<<" />
+        
+        <script type="text/javascript">
+var firstInterval;
+var secondInterval;
+document.getElementById("forward").addEventListener('click', function () {
+    clearInterval(secondInterval);
+    firstInterval = setInterval(function () {
+
+      document.getElementById("output").value += document.getElementById("inputType").value.charAt(0);
+        document.getElementById("inputType").value = document.getElementById("inputType").value.substr(1);
+        if(document.getElementById("inputType").value.length == 0){
+                      clearInterval(secondInterval);
+        }
+
+    }, 1000)
+});
+
+document.getElementById("backward").addEventListener('click', function () {
+    clearInterval(firstInterval);
+    secondInterval = setInterval(function () {
+        document.getElementById("inputType").value = document.getElementById("output").value.charAt(document.getElementById("output").value.length-1) + document.getElementById("inputType").value;
+
+
+        document.getElementById("output").value = document.getElementById("output").value.substr(0,document.getElementById("output").value.length-1);
+        if(document.getElementById("output").value.length == 0){
+            clearInterval(firstInterval);
+       }    }, 1000)
+});
+
+document.getElementById("pause").addEventListener('click', function () {
+    clearInterval(firstInterval);
+    clearInterval(secondInterval);
+});
+
+
+
+</script>
+
+                    
+        </form>
+
+</body>
+</html> 
+
+
+
+
+
